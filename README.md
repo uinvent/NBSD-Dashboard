@@ -1,27 +1,40 @@
-# Angu
+# Dashboard For NYC Bike Sharing
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+This project was generated with WebPack.
 
-## Development server
+## Installation
+To install required package Run `npm install` in project folder, It will take around 5 min.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Run Application
+Run `npm run dev` to host application on local machine.
 
-## Code scaffolding
+## Features
+1. Map View
+	Each bike station is represented by a marker on a map with the following colour coding:
+	Red -> No free bikes
+	Orange -> Less than 50% bikes available
+	Green -> Greater than 75% bikes available
+	Reference: 
+	https://ibb.co/fPpojn
+	https://ibb.co/cT78jn			
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2. Distance-based Query
+	Given a station name and a distance in km, the query interface will whittle down the map
+	view to only those stations that fall within “distance” from the target station.
+	Reference:
+	https://ibb.co/cpTg4n
+	
+3. Current Usage
+	A graphical representation of the current usage of individual stations as well as a global
+	view.
+	Reference: https://ibb.co/j93g4n
+	
+4. Historical Usage
+	A graphical representation of the minute-wise usage of individual stations as well as a global
+	view. 
+	Reference: https://ibb.co/mOJEPn
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+5. Search Bar
+	The search bar (auto complete will be brilliant) enables the user to filter the above two
+	usage views to a particular station by its name.
+	Reference: https://ibb.co/e0skVS
