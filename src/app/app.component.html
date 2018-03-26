@@ -1,0 +1,66 @@
+  <mat-toolbar color="primary">
+    <span>Dashboard</span>
+  </mat-toolbar>
+  <br>
+  <div class="distance-based-query">
+    <mat-card>
+          <strong>Filter Station</strong>
+          <ng2-completer [dataService]="dataService" [(ngModel)] ="selectedStationName" (selected)="stationSelected($event)" [minSearchLength]="1" ></ng2-completer>
+        </mat-card>
+        <mat-card style="margin-top:5%">
+          <strong>Distance Based Filter</strong>
+          <input type="text" [(ngModel)]="enteredDistance">
+          <button [disabled]="!isStationDataValid()" style="margin-left:85px; margin-top:10px" mat-raised-button color="accent" (click)="SetViewMapForFilteredStation()">Filter</button>
+  </mat-card>
+  <mat-card style="margin-top:5%">
+      <strong>All Stations</strong>
+      <button mat-raised-button color="primary" (click)="viewMapForAllStation()">Reset</button>
+    </mat-card>
+  </div>
+  <div class="map-view">
+    <mat-card>
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="true">
+      <agm-marker
+        *ngFor="let m of stationInfo != null ? stationInfo : []" [latitude]="m.lat" [longitude]="m.lon"
+        [markerDraggable]=false [visible]="m.is_visible" [iconUrl] =  "m.img_uri">
+        <agm-info-window>
+          <strong>{{m.name}}</strong>
+            <br>
+          {{m.station_status.num_bikes_available}} Bikes Available
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+     </mat-card>
+
+     <div class="current-usage-chart">
+     <mat-card>
+        <div style="display: block">
+          <strong>Current Usage Graph</strong>
+          <br>
+          <label>{{selectedStation == null ? 'All Stations': selectedStation.name }}</label>
+            <canvas baseChart
+                        [data]="currentUsageChartData"
+                        [labels]="currentUsageChartLabels"
+                        [chartType]="currentUsageChartType"
+            ></canvas>
+          </div>
+     </mat-card>
+    </div>
+    <div class="historical-usage-chart">
+        <mat-card>
+            <strong>Historical Usage Graph</strong>
+            <br>
+            <label>{{selectedStation == null ? 'All Stations': selectedStation.name }}</label>
+          <div style="display: block">
+               <canvas baseChart
+                           [data]="historicalUsageChartData"
+                           [labels]="historicalUsageChartLabels"
+                           [chartType]="historicalUsageChartType"
+                           [options]="historicalUsageChartOptions"
+                           [legend]="historicalUsageChartLegend"
+
+               ></canvas>
+             </div>
+        </mat-card>
+       </div>
+    </div>
